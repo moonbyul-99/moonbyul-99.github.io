@@ -5,7 +5,7 @@ show_date: true
 title:  GBDT算法(1)：基本理论
 date:   2023-09-12 13:40:20 -0600
 description: GBDT算法的基本理论
-img: img/20230911/鸦天狗.jpg
+img: /img/20230911/鸦天狗.jpg
 tags: [机器学习, GBDT, 机器学习比赛]
 author: 孙睿
 #github:  amaynez/Perceptron/
@@ -33,20 +33,28 @@ $$
 其中$x$是样本数据，$x\in R^{d}$，$n$为决策树的叶节点数目，$I_{\{x\in R_{m}\}}$为指示函数，$x$落在$R^{d}$中的区域$R_{m}$时为1，否则为0，区域$R_{m}$两两不交，$w_{m}\in R$。
 
 对回归树，需要确定划分$R_{m}$和权重$w_{m}$，使得$loss(y_{true},f(x))$最小。对二分类，我们只需将输出的$f(x)$通过logit函数转化为概率值，即
+
 $$
 logit(x) = \frac{1}{1+\exp(-f(x))}
 $$
+
 对多分类任务，利用"one vs all"准则可将其分解为多个二分类任务。因此我们仅讨论回归树情形。
 
 对集成学习，简单讲就是使用多个弱学习器去训练一个强学习器的结果。例如可以训练多颗决策树，每棵树预测取平均作为最终输出。这种做法直觉上看是保证了结果的鲁棒性。假设每棵树的训练误差$e_{i}$独立同分布，有
+
 $$
 E[e] = \mu, Var(e) = \sigma^{2}
 $$
+
 当我们将结果取均值时，我们有
+
 $$ 
 E[\frac{1}{n}\sum_{i=1}^{n}e_{i}] =\frac{1}{n}\sum_{i=1}^{n}E[e_{i}] =  \mu
 $$
-$$ Var(\frac{1}{n}\sum_{i=1}^{n}e_{i}) = \frac{1}{n^{2}}\sum_{i=1}^{n}Var(e_{i}) = \frac{1}{n}\sigma^{2}$$
+
+$$ 
+Var(\frac{1}{n}\sum_{i=1}^{n}e_{i}) = \frac{1}{n^{2}}\sum_{i=1}^{n}Var(e_{i}) = \frac{1}{n}\sigma^{2}
+$$
 
 可以看到这种简单的均值集成是控制了预测误差的方差，并没有减少误差期望$\mu$。
 
@@ -55,11 +63,18 @@ $$ Var(\frac{1}{n}\sum_{i=1}^{n}e_{i}) = \frac{1}{n^{2}}\sum_{i=1}^{n}Var(e_{i})
 ### Gradient Boosting
 
 Gradient Boosting 可以类比最优化算法中的梯度下降方法。假设前$m$步得到的模型为
-$$F_{m}(x) = \sum_{i=1}^{m}f_{i}(x)$$
+
+$$
+F_{m}(x) = \sum_{i=1}^{m}f_{i}(x)
+$$
+
 这里的$f_{i}$代表第$i$步训练得到的决策树，记第$m$步的预测值为$y_{m}$，真实值为$y$，有训练损失$loss(y_{m},y)$。
 
 现在考虑加入$f_{m+1}(x)$，同时减小$loss(y_{m}+f_{m+1}(x),y)$，可以看到，当$f_{m+1}(x) = -\eta \frac{\partial loss}{\partial \hat{y}} \vert_{\hat{y} = y_{m}}$时，其中 $\eta$ 为足够小的正数，此时一定有
-$$loss(y_{m}+f_{m+1}(x),y) \leq loss(y_{m},y)$$
+
+$$
+loss(y_{m}+f_{m+1}(x),y) \leq loss(y_{m},y)
+$$
 
 因此，在训练下一棵决策树时，其拟合的目标值应当为$-\eta \frac{\partial loss}{\partial \hat{y}}\vert_{\hat{y} = y_{m}}$，这也是算法名字中Gradient的由来。<br>
 
@@ -72,6 +87,7 @@ $$loss(y_{m}+f_{m+1}(x),y) \leq loss(y_{m},y)$$
 一般来讲，三种方法性能基本一致，不同的数据集上会略有差异，因此建议三种方法都试一下，选择效果最好的或者是集成一下。应用层面上，三种方法的API比较相似，掌握一个之后就能很快上手其他两个。下面介绍一下二阶梯度的思想。<br>
 
 gradient boosting 考虑$min \; loss(y_{m}+f,y)$, 对$loss$项做关于$\hat y$做泰勒展开至二阶，有
+
 $$\small
 \begin{equation}
 loss(y_{m} + \eta f,y) = loss(y_{m},y) +\eta \frac{\partial loss}{\partial \hat{y}}|_{\hat y = y_{m}} f +\eta^{2} \frac{1}{2}\frac{\partial^{2} loss}{\partial \hat{y}^{2}}\vert_{\hat y = y_{m}} f^{2} + o(\eta^2 f^2)
@@ -79,8 +95,10 @@ loss(y_{m} + \eta f,y) = loss(y_{m},y) +\eta \frac{\partial loss}{\partial \hat{
 $$
 
 当$\eta$足够小时，
+
 $$ \small
-loss(y_m + \eta f,y) \sim loss(y_{m},y) +\eta \frac{\partial loss}{\partial \hat{y}}|_{\hat y = y_{m}} f +\eta^{2} \frac{1}{2}\frac{\partial^{2} loss}{\partial \hat{y}^{2}}\vert_{\hat y = y_{m}} f^{2}$$
+loss(y_m + \eta f,y) \sim loss(y_{m},y) +\eta \frac{\partial loss}{\partial \hat{y}}|_{\hat y = y_{m}} f +\eta^{2} \frac{1}{2}\frac{\partial^{2} loss}{\partial \hat{y}^{2}}\vert_{\hat y = y_{m}} f^{2}
+$$
 
 这时可以通过最小化这个二阶泰勒展开，得到新的$f$,使得
 $$loss(y_{m}+f,y) \leq loss(y_{m},y)$$
@@ -89,6 +107,7 @@ $$loss(y_{m}+f,y) \leq loss(y_{m},y)$$
 #### xgboost的具体实现
 
 参考陈天奇的论文[<sup>1</sup>](#refer-1)，有
+
 $$
 \begin{align}
 L^{t} &= \sum_{i=1}^{n}[g_i f_{t}(x_{i}) + \frac{1}{2}h_{i}f_{t}^{2}(x_i)] + \Omega(f_t) \\
@@ -105,7 +124,7 @@ $$
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="img/posts/20230911/1694948167845.png" width = "75%" alt=""/>
+    src="/img/posts/20230911/1694948167845.png" width = "75%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
