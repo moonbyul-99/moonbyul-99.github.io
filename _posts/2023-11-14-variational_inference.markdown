@@ -178,7 +178,13 @@ $$
 
 这里用到指数分布族的性质，充分统计量的期望$E_{q}[t(\beta)] = \nabla_{\lambda}a_{g}(\lambda)$，该性质的推导见网页[<sup>2</sup>](#refer-anchor-2)。
 
-计算$\nabla_{\lambda} L(\lambda) = \nabla^{2}_{\lambda} a_{g}(\lambda) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda) = 0$，得到全局变量$\lambda$的更新<br>
+由
+
+$$
+\nabla_{\lambda} L(\lambda) = \nabla^{2}_{\lambda} a_{g}(\lambda) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda) = 0
+$$
+
+得到全局变量$\lambda$的更新<br>
 
 $$ 
 \lambda = E_{q}[\eta_{g}(x,z,\alpha)] 
