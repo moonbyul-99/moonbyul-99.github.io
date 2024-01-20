@@ -5,7 +5,7 @@ show_date: true
 title:  GBDT算法(1)：基本理论
 date:   2023-09-12 13:40:20 -0600
 description: GBDT算法的基本理论
-header-img: /img/20230911/鸦天狗.jpg
+header-img: img/20230911/鸦天狗.jpg
 tags: [机器学习, GBDT, 机器学习比赛]
 author: 孙睿
 #github:  amaynez/Perceptron/

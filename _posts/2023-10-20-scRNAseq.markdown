@@ -5,7 +5,7 @@ show_date: true
 title:  scRNA-seq分析基本流程
 date:   2023-10-20 13:40:20 -0600
 description: scRNA-seq分析基本流程
-header-img: /img/20231020/鬼使白.jpg
+header-img: img/20231020/鬼使白.jpg
 tags: [scRNA-seq,数据分析]
 author: 孙睿
 #github:  amaynez/Perceptron/

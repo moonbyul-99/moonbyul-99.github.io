@@ -5,7 +5,7 @@ show_date: true
 title:  变分推断总结
 date:   2023-11-14 13:40:20 -0600
 description: 变分推断总结
-header-img: /img/20231116/雪童子.jpg
+header-img: img/20231116/雪童子.jpg
 tags: [机器学习]
 author: 孙睿
 #github:  amaynez/Perceptron/
@@ -229,7 +229,7 @@ $$
 \lambda_{t+1} = \lambda_{t} + \rho\nabla^{2}_{\lambda} a_{g}(\lambda_t) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda_t)
 $$
 
-先前的更新也可以看做是$\rho = \nabla^{2}_{\lambda} a_{g}(\lambda_t)^{-1}$的梯度下降。
+先前的更新也可以看做是 $\rho = \nabla^{2}_{\lambda} a_{g}(\lambda_t)^{-1}$ 的梯度下降。
 
 对变分参数直接进行梯度下降面临一个问题，梯度下降是在变分参数的欧式空间下进行的，但是两个变分参数差异很小的分布不一定在概率分布空间中接近。例如$\mathcal{N}(0,0.01)$和$\mathcal{N}(0.1,0.01)$在概率空间中差异很大，但在变分参数空间中差异很小。为解决这一问题，需要在新的度量下去计算梯度，因此引入natural gradient的概念。关于这部分的讨论，见参考文献[<sup>3</sup>](#refer-anchor-3)。这里我们只要知道在优化变分参数时，使用如下的natural gradient是更好的选择
 
