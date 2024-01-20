@@ -235,7 +235,7 @@ $$
 \lambda_{t+1} = \lambda_{t} + \rho\nabla^{2}_{\lambda} a_{g}(\lambda_t) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda_t)
 $$
 
-先前的更新也可以看做是 
+因此，上一节中$\lambda$的更新也可以看做是步长
 
 $$
 \rho={\nabla^{2}_{\lambda} a_{g}(\lambda_t)}^{-1}
