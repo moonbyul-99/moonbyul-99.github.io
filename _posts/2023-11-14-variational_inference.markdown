@@ -156,29 +156,29 @@ $$
 现在仅考虑$\lambda$的估计，记$\mathrm{ELBO}(q) = L(q)$,有<br>
 
 $$
-\begin{equation}
-\begin{aligned}
+%\begin{equation}
+\begin{align}
 L(\lambda) &= E_{q}[\log p(x,z,\beta)] - E_{q}[\log q(\beta,z) ] \\
 & = E_{q}[\log p(\beta  \vert x,z)] - E_{q}[\log q(\beta)] + C \tag{9-9}
-\end{aligned}
-\end{equation}
+\end{align}
+%\end{equation}
 $$
 
 代入(9-2,9-6,9-7)计算，有<br>
 
 $$\small
 %\begin{equation}
-\begin{aligned}
+\begin{align}
 L(\lambda) &= E_q[\log h(\beta) + \eta_{g}(x,z,\alpha)^{t} t(\beta) - a_{g}(\eta_{g}(x,z,\alpha))] - E_{q}[\log h(\beta) + \lambda^{t} t(\beta) - a_{g}(\lambda)] \\
 &= E_q[\eta_{g}(x,z,\alpha)]^{t}E_{q}[t(\beta)] - a_{g}(\eta_{g}(x,z,\alpha)) -\lambda^{t}E_{q}[t(\beta)] - a_{g}(\lambda) \\
 &= E_q[\eta_{g}(x,z,\alpha)]^{t} \nabla_{\lambda}a_{g}(\lambda)   -\lambda^{t}\nabla_{\lambda}a_{g}(\lambda)- a_{g}(\lambda) + C \tag{9-10}
-\end{aligned}
+\end{align}
 %\end{equation}
 $$
 
 这里用到指数分布族的性质，充分统计量的期望$E_{q}[t(\beta)] = \nabla_{\lambda}a_{g}(\lambda)$，该性质的推导见网页[<sup>2</sup>](#refer-anchor-2)。
 
-计算$ \nabla_{\lambda} L(\lambda) = \nabla^{2}_{\lambda} a_{g}(\lambda) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda) = 0 $，得到全局变量$ \lambda $的更新<br>
+计算$\nabla_{\lambda} L(\lambda) = \nabla^{2}_{\lambda} a_{g}(\lambda) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda) = 0$，得到全局变量$ \lambda $的更新<br>
 
 $$ 
 \lambda = E_{q}[\eta_{g}(x,z,\alpha)] 
