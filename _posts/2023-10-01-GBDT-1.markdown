@@ -10,6 +10,7 @@ tags: [机器学习, GBDT, 机器学习比赛]
 author: 孙睿
 #github:  amaynez/Perceptron/
 mathjax: yes
+catalog: true
 ---
 - [背景](#背景)
 - [决策树模型与集成学习](#决策树模型与集成学习)
