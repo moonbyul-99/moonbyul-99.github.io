@@ -12,12 +12,12 @@ author: 孙睿
 mathjax: yes
 catalog: true
 ---
-- [背景](#背景)
+<!-- - [背景](#背景)
 - [决策树模型与集成学习](#决策树模型与集成学习)
 - [Gradient Boosting](#gradient-boosting)
 - [GBDT三件套](#gbdt三件套)
 - [xgboost的具体实现](#xgboost的具体实现)
-- [小结](#小结)
+- [小结](#小结) -->
 
 ### 背景
 

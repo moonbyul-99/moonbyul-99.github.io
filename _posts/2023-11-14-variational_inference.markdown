@@ -5,11 +5,12 @@ show_date: true
 title:  变分推断总结
 date:   2023-11-14 13:40:20 -0600
 description: 变分推断总结
-img: posts/20231116/雪童子.jpg
+img: img/20231116/雪童子.jpg
 tags: [机器学习]
 author: 孙睿
 #github:  amaynez/Perceptron/
 mathjax: yes
+catalog: true
 ---
 
 最近做单细胞多组学数据整合分析时，用到了MOFA[<sup>1</sup>](#refer-anchor-1)这个基于变分推断的多组学整合方法，于是决定花点时间学习一下变分推断这部分内容，这篇博客是自己学习变分推断过程中的一点笔记。阅读这篇笔记需要对参数推断、最优化内容有一定的了解。
@@ -17,6 +18,7 @@ mathjax: yes
 ## 变分推断(variational inference)
 
 在贝叶斯统计中，一个常见的问题是后验概率的推断，记$x$是观测值，$z$是隐变量，希望得到$p(z\vert x)$。由贝叶斯公式，我们有<br>
+
 $$ 
 \begin{equation}
 p(z \vert x) = \frac{p(z,x)}{p(x)} = \frac{p(z,x)}{\int p(z,x) \mathop{}\mathrm{d}z}
@@ -26,12 +28,14 @@ $$
 但在实际计算中，$\int p(z,x) \mathop{}\mathrm{d}z$ 通常是难以显示计算的，因此考虑其他的策略来估计$p(z \vert x)$。
 
 考虑如下优化问题<br>
+
 $$\begin{equation}
  \min_{q \in \mathcal{L}} \mathrm{KL}(q(z) \vert  \vert p(z \vert x)) = \mathrm{E}_{q} \log (q(z)  \vert  \vert  p(z \vert x))
 \end{equation}
 $$
 
 将问题转化为在一个特定分布族中，寻找与$p(z \vert x)$最接近的概率分布的变分问题。考虑一类特殊的分布族，平均场变分分布族(mean-field variational family)<br>
+
 $$\begin{equation}
 q(z) = \prod_{j=1}^{J}q_{j}(z_{j})
 \end{equation}
@@ -40,25 +44,33 @@ $$
 即隐变量的各个分量独立。上述假设使得我们可以通过逐次坐标优化的策略去求解优化问题的一个局部最优值。
 
 定义$z_{j}$的完全条件概率为给定观测$x$和$z$中除$z_{j}$之外的所有分量的条件概率，记为$p(z_{j} \vert z_{-j},x)$。那么利用变分中的欧拉-拉格朗日方程，能够得到$q_{j}^{*}(z_{j})$的最优解为
+
 $$\begin{equation}
 q_{j}^{*}(z_{j} ) \propto \exp \{\mathrm{E}_{-j} [ \log p(z_{j} \vert z_{-j},x)]\}
-\end{equation}$$
+\end{equation}
+$$
 
 其中$\mathrm{E_{-j}}$是相对于概率密度$\prod_{i\neq j}q(z_{i})$的期望，该结果具体计算过程如下:首先处理$KL$散度，<br>
+
 $$\begin{equation}
     \begin{aligned}
     \mathrm{KL}(q(z) \vert  \vert p(z \vert x)) &= \mathrm{E}_{q}[\log q(z) - \mathrm{\log p(z \vert x)}] \\
     &=  \mathrm{E}[\log q(z) - \mathrm{\log p(z,x)}] + \log p(x) \\
     &= - \mathrm{ELBO(q(z))} + \log p(x)
     \end{aligned}
-\end{equation}$$
+\end{equation}
+$$
 
 其中$\mathrm{ELBO}(q)$被称作evidence lower bound，在变分推断中，最小化$\mathrm{KL}$散度常被转化为最大化$\mathrm{ELBO}$。在平均场假设下，我们有<br>
-$$\begin{equation}
+
+$$
+\begin{equation}
 \mathrm{ELBO}(q) = \int [\log p(z,x) - \sum_{j} \log q(z_{j})](\prod_{j}q(z_{j})) \mathop{} \mathrm{d} z
-\end{equation}$$
+\end{equation}
+$$
 
 变分法中的欧拉-拉格朗日方程告诉我们，对一个关于函数$y$的泛函$J(y) = \int F(x,y,y_{x}) \mathop{} \mathrm{d} z$, $J(y)$取极值时$y(x)$满足如下条件：<br>
+
 $$
 \begin{equation}
 \frac{\partial F}{\partial y} - \frac{\mathrm{d}}{\mathrm{d}x}(\frac{\partial F}{\partial y_{x}} ) = 0
@@ -66,6 +78,7 @@ $$
 $$
 
 仅考虑$z_{j}$的情况下，我们有<br>
+
 $$
 \begin{equation}
 \scriptsize
@@ -84,7 +97,7 @@ $$
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="/assets/img/posts/20231116/CAVI.png" width = "95%" alt=""/>
+    src="/img/20231116/CAVI.png" width = "95%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -103,7 +116,7 @@ $$
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="/assets/img/posts/20231116/svi-1.png" width = "95%" alt=""/>
+    src="/img/20231116/svi-1.png" width = "95%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -113,7 +126,8 @@ $$
   	</div>
 </center>
 
-在上述模型中，有N个观测值$x_{n}$,每个观测值有一个local的隐变量$z_{n} = (z_{n,1},z_{n,2},...,z_{n,J})$，对所有观测值存在一个global隐变量$\beta$以及global参数$\alpha$。随机变分推断的模型假设如下：
+在上述模型中，有N个观测值$x_{n}$,每个观测值有一个local的隐变量$z_{n} = (z_{n,1},z_{n,2},...,z_{n,J})$，对所有观测值存在一个global隐变量$\beta$以及global参数$\alpha$。随机变分推断的模型假设如下:
+
 $$
 \begin{align}
 p(x_{n},z_{n} \vert x_{-n},z_{-n},\beta,\alpha) &= p(x_{n},z_{n} \vert \beta,\alpha) \tag{9-0}\\
@@ -128,6 +142,7 @@ $$
 其中,假设(9-0)说明了在给定全局隐变量$\beta$的情形下，局部数据$(x_{n},z_{n})$和其他数据是条件独立的。假设(9-1)是图二对应的概率图模型的联合概率密度，假设(9-2,9-3)声明了完全条件概率是指数族分布，假设(9-4,9-5)声明了先验概率是指数族分布。进一步假设$(x_{n},z_{n})和\beta$是共轭概率分布，计算可得假设(9-5)中的充分统计量$t(\beta) = (\beta, -a_{l}(\beta))$，对应的$\alpha = (\alpha_{1},\alpha_{2})$,假设(9-2)中的$\eta_{g}(x,z,\alpha) = (\alpha_{1} + \sum_{n=1}^{N}t(x_{n},z_{n}),\alpha_{2} + N)$。
 
 考虑平均场假设，并且假设平均场下的概率分布和先验概率形式一致，有
+
 $$
 \begin{align}
 q(z,\beta) &= q(\beta \vert \lambda)\prod_{n=1}^{J}\prod_{j=1}^{J}q(z_{nj} \vert \phi_{nj}) \tag{9-6} \\
@@ -139,14 +154,18 @@ $$
 ### 变分推断求解
 
 现在仅考虑$\lambda$的估计，记$\mathrm{ELBO}(q) = L(q)$,有<br>
-$$\begin{equation}
+
+$$
+\begin{equation}
 \begin{aligned}
 L(\lambda) &= E_{q}[\log p(x,z,\beta)] - E_{q}[\log q(\beta,z) ] \\
 & = E_{q}[\log p(\beta  \vert x,z)] - E_{q}[\log q(\beta)] + C \tag{9-9}
 \end{aligned}
-\end{equation}$$
+\end{equation}
+$$
 
 代入(9-2,9-6,9-7)计算，有<br>
+
 $$
 \begin{equation}
 \begin{aligned}
@@ -154,16 +173,25 @@ L(\lambda) &= E_q[\log h(\beta) + \eta_{g}(x,z,\alpha)^{t} t(\beta) - a_{g}(\eta
 &= E_q[\eta_{g}(x,z,\alpha)]^{t}E_{q}[t(\beta)] - a_{g}(\eta_{g}(x,z,\alpha)) -\lambda^{t}E_{q}[t(\beta)] - a_{g}(\lambda) \\
 &= E_q[\eta_{g}(x,z,\alpha)]^{t} \nabla_{\lambda}a_{g}(\lambda)   -\lambda^{t}\nabla_{\lambda}a_{g}(\lambda)- a_{g}(\lambda) + C \tag{9-10}
 \end{aligned}
-\end{equation}$$
+\end{equation}
+$$
 
 这里用到指数分布族的性质，充分统计量的期望$E_{q}[t(\beta)] = \nabla_{\lambda}a_{g}(\lambda)$，该性质的推导见网页[<sup>2</sup>](#refer-anchor-2)。
 
 计算$ \nabla_{\lambda} L(\lambda) = \nabla^{2}_{\lambda} a_{g}(\lambda) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda) = 0 $，得到全局变量$ \lambda $的更新<br>
-$$ \lambda = E_{q}[\eta_{g}(x,z,\alpha)] $$
+
+$$ 
+\lambda = E_{q}[\eta_{g}(x,z,\alpha)] 
+$$
+
 类似的可以计算<br>
-$$ \phi_{nj} = E_{q}[\eta_{l}(x_n,z_{n,-j},\beta)] $$。
+
+$$ 
+\phi_{nj} = E_{q}[\eta_{l}(x_n,z_{n,-j},\beta)] 
+$$
 
 以上参数的更新也可以由(4)得到，
+
 $$ 
 \begin{aligned}
 q(\beta \vert \lambda) &\propto \exp \{E_{-\beta}[\log p(\beta \vert x,z,\alpha)]\} \\ 
@@ -175,7 +203,7 @@ $$
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="/assets/img/posts/20231116/svi-2.png" width = "95%" alt=""/>
+    src="/img/20231116/svi-2.png" width = "95%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -190,14 +218,21 @@ $$
 ### 随机变分推断求解
 
 图三中的算法是从逐坐标优化的角度给出的，现在从梯度上升的角度去考虑。对于$L(\lambda)$,先前我们计算得到梯度如下
-$$\nabla_{\lambda} L(\lambda) = \nabla^{2}_{\lambda} a_{g}(\lambda) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda)$$
+
+$$
+\nabla_{\lambda} L(\lambda) = \nabla^{2}_{\lambda} a_{g}(\lambda) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda)
+$$
 
 对光滑函数来讲，在足够小的步长$\rho >0$下，有$f(x + \rho \nabla f(x))\geq f(x)$,因此有更新
-$$\lambda_{t+1} = \lambda_{t} + \rho\nabla^{2}_{\lambda} a_{g}(\lambda_t) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda_t)$$
+
+$$
+\lambda_{t+1} = \lambda_{t} + \rho\nabla^{2}_{\lambda} a_{g}(\lambda_t) (E_{q}[\eta_{g}(x,z,\alpha)] - \lambda_t)
+$$
 
 先前的更新也可以看做是$\rho = \nabla^{2}_{\lambda} a_{g}(\lambda_t)^{-1}$的梯度下降。
 
 对变分参数直接进行梯度下降面临一个问题，梯度下降是在变分参数的欧式空间下进行的，但是两个变分参数差异很小的分布不一定在概率分布空间中接近。例如$\mathcal{N}(0,0.01)$和$\mathcal{N}(0.1,0.01)$在概率空间中差异很大，但在变分参数空间中差异很小。为解决这一问题，需要在新的度量下去计算梯度，因此引入natural gradient的概念。关于这部分的讨论，见参考文献[<sup>3</sup>](#refer-anchor-3)。这里我们只要知道在优化变分参数时，使用如下的natural gradient是更好的选择
+
 $$ 
 \begin{aligned}
 \hat{\nabla}_{\lambda} L &= E_{q}[\eta_{g}(x,z,\alpha)] - \lambda \\
@@ -206,6 +241,7 @@ $$
 $$
 
 只考虑对$\lambda$的更新，注意到
+
 $$
 \begin{equation}
 \begin{aligned}
@@ -217,8 +253,13 @@ L(\lambda) &= E_{q}[\log p(x,z,\beta)] - E_{q}[\log q(\beta,z) ] \\
 $$
 
 对于local term的无偏估计，可以通过从$x_{1},...x_{N}$中抽样实现。定义
-$$L_I(\lambda) =E_{q}[\log p(\beta)] - E_q [\log q(\beta)] + NE_{q}[\log p(x_I,z_I \vert \beta) - \log q(z_I)]$$
+
+$$
+L_I(\lambda) =E_{q}[\log p(\beta)] - E_q [\log q(\beta)] + NE_{q}[\log p(x_I,z_I \vert \beta) - \log q(z_I)]
+$$
+
 其中$I$是$\{1,2,...N\}$中的均匀随机变量，可以基于$L_{I}(\lambda)$得到natural gradient的无偏估计。
+
 $$
 \begin{aligned}
 \hat{\nabla}_{\lambda} L_{i} &= E_{q}[\eta_{g}(x_i,z_i,\alpha)] - \lambda  \\
@@ -232,7 +273,7 @@ $$
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="/assets/img/posts/20231116/svi-3.png" width = "95%" alt=""/>
+    src="/img/20231116/svi-3.png" width = "95%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -252,17 +293,27 @@ $$
 个人认为变分自编码[<sup>4</sup>](#refer-anchor-4)最重要的一点是使用reparameterization trick改善了一些期望的估计，同时借助深度学习的策略放松了变分推断、随机变分推断只能处理特定的概率分布族的限制。
 
 变分自编码器考虑如下问题，给定观测值$x$，我们希望得到一个编码器$q_{\phi}(z \vert x)$来得到隐变量，之后设计一个解码器$p_{\theta}(x \vert z)$将原数据从隐变量$z$中恢复出来。变分自编码器最终的优化目标为
-$$L(\theta,\phi;x) = -D_{KL}(q_{\phi}(z \vert x)  \vert  \vert  p_{\theta}(z)) + E_{q_{\phi}(z \vert x)}[\log p_{\theta}(x \vert z)] $$
+
+$$
+L(\theta,\phi;x) = -D_{KL}(q_{\phi}(z \vert x)  \vert  \vert  p_{\theta}(z)) + E_{q_{\phi}(z \vert x)}[\log p_{\theta}(x \vert z)] 
+$$
 
 在计算上述损失函数的梯度时，关于$\phi$的梯度通常使用如下策略估计
-$$\nabla E_{q}[f(z)] = E_{q}[f(z)\nabla_{q}\log q_{\phi}(z)] \sim \frac{1}{L} \sum_{i=1}^{L} f(z)\nabla_{q}\log q_{\phi}(z_{l}) $$
+
+$$
+\nabla E_{q}[f(z)] = E_{q}[f(z)\nabla_{q}\log q_{\phi}(z)] \sim \frac{1}{L} \sum_{i=1}^{L} f(z)\nabla_{q}\log q_{\phi}(z_{l}) 
+$$
 
 上述估计直接基于概率密度$q_{\phi}(z \vert x)$存在很大的方差。
 
 重参数化提供了一种解决思路，对$z\sim q_{\phi}(z \vert x)$, 假设存在变换使得$z = g_{\phi}(\epsilon,x), \;\; \epsilon \sim p(\epsilon)$，则有
-$$ E_{q(z)} [f(z)] = E_{p(\epsilon)}[f(g_{\phi}(\epsilon,x))]\sim \frac{1}{L} \sum_{i=1}^{L} f(g_{\phi}(\epsilon_{i},x))$$
+
+$$ 
+E_{q(z)} [f(z)] = E_{p(\epsilon)}[f(g_{\phi}(\epsilon,x))]\sim \frac{1}{L} \sum_{i=1}^{L} f(g_{\phi}(\epsilon_{i},x))
+$$
 
 由此，可以得到$L(\theta,\phi;x)$的一个估计
+
 $$
 \begin{aligned}
 \widetilde{L}(\theta,\phi,x) &= \frac{1}{L}\sum_{l=1}^{L}[\log p_{\theta}(x,z_{l}) - \log q_{\phi}(z_{l} \vert x)] \\
@@ -273,7 +324,7 @@ $$
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="/assets/img/posts/20231116/AE.png" width = "95%" alt=""/>
+    src="/img/20231116/AE.png" width = "95%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;

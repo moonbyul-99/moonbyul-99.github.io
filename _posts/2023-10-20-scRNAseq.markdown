@@ -12,6 +12,7 @@ author: 孙睿
 mathjax: yes
 catalog: true
 ---
+<!-- 
 - [scRNA-seq 基本分析流程](#scrna-seq-基本分析流程)
   - [数据准备](#数据准备)
   - [QC(quality control)](#qcquality-control)
@@ -27,7 +28,7 @@ catalog: true
     - [umap based on PCA of HVG](#umap-based-on-pca-of-hvg)
     - [umap directly on all HVG](#umap-directly-on-all-hvg)
 - [总结](#总结)
-- [utils 中的一些函数](#utils-中的一些函数)
+- [utils 中的一些函数](#utils-中的一些函数) -->
 
 ## scRNA-seq 基本分析流程
 
