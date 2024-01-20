@@ -5,7 +5,7 @@ show_date: true
 title:  变分推断总结
 date:   2023-11-14 13:40:20 -0600
 description: 变分推断总结
-img: img/20231116/雪童子.jpg
+header-img: /img/20231116/雪童子.jpg
 tags: [机器学习]
 author: 孙睿
 #github:  amaynez/Perceptron/
@@ -166,14 +166,14 @@ $$
 
 代入(9-2,9-6,9-7)计算，有<br>
 
-$$
-\begin{equation}
+$$\small
+%\begin{equation}
 \begin{aligned}
 L(\lambda) &= E_q[\log h(\beta) + \eta_{g}(x,z,\alpha)^{t} t(\beta) - a_{g}(\eta_{g}(x,z,\alpha))] - E_{q}[\log h(\beta) + \lambda^{t} t(\beta) - a_{g}(\lambda)] \\
 &= E_q[\eta_{g}(x,z,\alpha)]^{t}E_{q}[t(\beta)] - a_{g}(\eta_{g}(x,z,\alpha)) -\lambda^{t}E_{q}[t(\beta)] - a_{g}(\lambda) \\
 &= E_q[\eta_{g}(x,z,\alpha)]^{t} \nabla_{\lambda}a_{g}(\lambda)   -\lambda^{t}\nabla_{\lambda}a_{g}(\lambda)- a_{g}(\lambda) + C \tag{9-10}
 \end{aligned}
-\end{equation}
+%\end{equation}
 $$
 
 这里用到指数分布族的性质，充分统计量的期望$E_{q}[t(\beta)] = \nabla_{\lambda}a_{g}(\lambda)$，该性质的推导见网页[<sup>2</sup>](#refer-anchor-2)。
