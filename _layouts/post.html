@@ -189,6 +189,12 @@ layout: default
 <!-- disqus 公共JS代码 end -->
 {% endif %}
 
+<!-- # 数学公式 -->
+{/% if page.mathjax %}
+<span>
+  {/% include mathjax_support.html %}
+</span>
+{/% endif %}
 
 {% if site.anchorjs %}
 <!-- async load function -->
