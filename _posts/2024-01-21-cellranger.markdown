@@ -104,7 +104,7 @@ fastp -i CYHM_S1_L001_R1_001.fastq.gz -I CYHM_S1_L001_R2_001.fastq.gz -o /work/s
 fastp v0.23.4, time used: 1959 seconds
 ```
 
-之后运行cellranger-arc count, <font color=red>**问题成功解决!!!**</font> 
+之后运行cellranger-arc count, **<font color=red>问题成功解决!!!</font>**
 
 ```
 - ATAC peak locations:                           /work/swap/sunrui/rna_seq/clean_rna/CY/CYHM/outs/atac_peaks.bed
@@ -217,7 +217,11 @@ fastp -in R3 ......
   	</div>
 </center>
 
-可以看到问题是说过滤后数据的第八行不匹配，用 zcat file | head -n 20 命令查看R1，R2，R3后发现，有的片段,R1中过滤掉了，但是R2，R3中没有，所以出现的问题。 猜测，要是将一个片段R1，R2，R3同时过滤掉就没有问题了？
+可以看到问题是说过滤后数据的第八行不匹配，用 
+```
+zcat file | head -n 20
+```
+查看R1，R2，R3后发现，有的片段,R1中过滤掉了，但是R2，R3中没有，所以出现的问题。 猜测，要是将一个片段R1，R2，R3同时过滤掉就没有问题了？
 
 后面又问合作方工程师，说让我只用 fastp -in file1 -out file2 这样的默认参数试一下（我很怀疑，这样还是分开处理，怎么解决上面的问题？）
 
