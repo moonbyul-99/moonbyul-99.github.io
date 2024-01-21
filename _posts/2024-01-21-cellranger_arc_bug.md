@@ -30,9 +30,7 @@ catalog: true
   	</div>
 </center>
 
-## 测序公司反馈
-
-和昆明动物所测序工程师沟通后，反馈结果如下
+和合作方测序工程师沟通后，反馈结果如下
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -52,11 +50,13 @@ catalog: true
 
 直接参考图1中10X的日志信息，在cellranger-arc count中设置参数 --r1-length=26, 报错。 原因是cellranger-arc count中根本没有这个参数，致信10X官方后也得到了这个回复，确实没有。淦！
 
-之后考虑分别跑rna-seq和atac-seq，10X 官网上倒是有提这个怎么把多组学数据分别用RNA和ATAC的流程处理，但是这样做和直接cellranger-arc count之间的差异有多大，需要问问10X官方。
+之后考虑分别跑rna-seq和atac-seq，10X 官网上倒是有提怎么把多组学数据分别用RNA和ATAC的流程处理，但是这样做和直接cellranger-arc count之间的差异有多大，需要后续咨询10X官方。
 
-开始先做的cellranger count看RNA-seq能不能行，需要加额外参数 --r1-length=26 和 --chemistry="ARC-v1"，我忘记当时有没有加 --r2-length=26 了，淦！但是RNA-seq是OK的，能出结果并且结果不太烂。
+开始先做的cellranger count看RNA-seq效果，此时需要加额外参数 --r1-length=26 和 --chemistry="ARC-v1"。最后结果RNA-seq是可行的，能出结果并且结果不太烂。
 
 ## 后续解决尝试
+
+
 
 ### 2024.01.16
 
