@@ -97,6 +97,8 @@ service-worker: true
 # 数学公式
 markdown: kramdown
 
+# 允许博客提前编译
+future: true
 # Friends
 # friends: [
 #     {
