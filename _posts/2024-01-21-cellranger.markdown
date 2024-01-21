@@ -4,7 +4,7 @@ read_time: true
 show_date: true
 title:  cellranger-arc 使用说明及bug fix
 date:   2024-01-21 13:40:20 -0600
-header-img: img/20240121/千姬.png
+header-img: img/20240121/千姬.jpg
 tags: [计算生物学，生信软件，cellranger]
 author: 孙睿
 #github:  amaynez/Perceptron/
