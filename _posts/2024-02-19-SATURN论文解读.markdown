@@ -29,13 +29,13 @@ catalog: true
 
 ##  输入 
 
-- 多个物种的scRNA-seq数据，物种$i$数据记为 $X^{s_{i}}$，维度为$(C_{s_{i}},\vert\mathcal{G}_{s_i}\vert)$。$C_{s_i}$是物种的细胞数目，$\mathcal{G_{s_{i}}}$是物种的基因集合
+- 多个物种的scRNA-seq数据，物种$i$数据记为 $X^{s_{i}}$，维度为$(C_{s_{i}},\vert \mathcal{G}_{s_i}\vert )$。$C_{s_i}$是物种的细胞数目，$\mathcal{G_{s_{i}}}$是物种的基因集合
 - 细胞注释 $y^{s_{i}}$，维度为$C_{s_{i}}$
 - 蛋白质嵌入 $P\in R^{\vert \mathcal{G}\vert \times p}$, 其中 $\mathcal{G} = \cup_{s_{i}} \mathcal{G_{s_{i}}}$, 记录了所有物种中各个基因对应蛋白质的向量表示。
 
 ## 输出 
 - 多物种细胞的统一嵌入 $z_{c}\in R^{k}$
-- 基因-宏基因权重矩阵 $W \in R^{|\mathcal{G}| \times |\mathcal{M}|}$
+- 基因-宏基因权重矩阵 $W \in R^{\vert \mathcal{G}\vert  \times \vert \mathcal{M}\vert }$
 
 ## 宏基因（Macrogene）初始化
 
@@ -45,17 +45,17 @@ $$
 e_{c} = ReLU(LayerNorm(W_{s}^{T} \log(X_{c}^{s} + 1 )))
 $$
 
-这里$W_{s}^{T} \in R^{|\mathcal{M}|\times |\mathcal{G_{s}}|}$， 是一个物种特异的转换矩阵，也是后面网络学习的参数之一。
+这里$W_{s}^{T} \in R^{\vert \mathcal{M}\vert \times \vert \mathcal{G_{s}}\vert }$， 是一个物种特异的转换矩阵，也是后面网络学习的参数之一。
 
 一个有生物解释性的宏基因的初始化方法是借助蛋白质嵌入信息实现。通过对蛋白质进行聚类，将其划分为M个具有一定生物意义（功能相似，序列相似……）的cluster，文章中通过KNN进行聚类。
 
-之后将质心定义为宏基因，每个基因$g$到每个质心（宏基因）$m$的距离$d_{m,g}$反映了该基因与这个宏基因的关系，进一步定义转换矩阵$W \in R^{|\mathcal{G}| \times |\mathcal{M}|}$为：
+之后将质心定义为宏基因，每个基因$g$到每个质心（宏基因）$m$的距离$d_{m,g}$反映了该基因与这个宏基因的关系，进一步定义转换矩阵$W \in R^{\vert \mathcal{G}\vert  \times \vert \mathcal{M}\vert }$为：
 
 $$
 W_{g,m} = 2\times(\log(\frac{1}{rank(d_{m,g})} + 1))^{2}
 $$
 
-前面提到的$W_{s} = W[\mathcal{G_s}, :] \in R^{|\mathcal{G_{s}}|\times |\mathcal{M}|}$
+前面提到的$W_{s} = W[\mathcal{G_s}, :] \in R^{\vert \mathcal{G_{s}}\vert \times \vert \mathcal{M}\vert }$
 
 
 ## Autoencoder预训练
@@ -77,7 +77,7 @@ $$
 
 ### decoder 
 
-decoder 部分， 输出 $\mu_{c}, O_{c}, \theta \in R^{|\mathcal{S}|}$, 其中$\theta$是*nn.Parameter()* 定义的一个可微参数
+decoder 部分， 输出 $\mu_{c}, O_{c}, \theta \in R^{\vert \mathcal{S}\vert }$, 其中$\theta$是*nn.Parameter()* 定义的一个可微参数
 
 $$
 \begin{aligned}
