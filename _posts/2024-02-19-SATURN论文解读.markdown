@@ -29,7 +29,7 @@ catalog: true
 
 ###  输入 
 
-- 多个物种的scRNA-seq数据，物种$i$数据记为 $X^{s_{i}}$，维度为 $(C_{s_{i}},\vert \mathcal{G}_{s_i} \vert )$。$C_{s_i}$是物种的细胞数目，$\mathcal{G_{s_{i}}}$是物种的基因集合
+- 多个物种的scRNA-seq数据，物种$i$数据记为 $X^{s_{i}}$，维度为 $(C_{s_{i}}, \vert \mathcal{G}_{s_i} \vert )$。$C_{s_i}$是物种的细胞数目，$\mathcal{G_{s_{i}}}$是物种的基因集合
 - 细胞注释 $y^{s_{i}}$，维度为$C_{s_{i}}$
 - 蛋白质嵌入 $P\in R^{\vert \mathcal{G}\vert \times p}$, 其中 $\mathcal{G} = \cup_{s_{i}} \mathcal{G_{s_{i}}}$, 记录了所有物种中各个基因对应蛋白质的向量表示。
 
@@ -98,7 +98,9 @@ $$
 一般的负二项分布定义如下：
 
 $$
-P(X = k) = C_{{k+r-1}}^{r-1} p^{r}(1-p)^{k} \quad k=0,1,2,...
+\begin{equation}
+P(X = k) = \binom{r-1}{k+r-1} p^{r}(1-p)^{k} \quad k=0,1,2,...
+\end{equation}
 $$
 
 ZINB定义如下：
