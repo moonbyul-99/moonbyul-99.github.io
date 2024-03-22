@@ -1,0 +1,125 @@
+---
+layout: post
+read_time: true
+show_date: true
+title:  灵长类大脑单细胞转录组学比对分析论文解读
+date:   2024-02-28 13:40:20 -0600
+header-img: img/20240219/刚铎.webp
+tags: [计算生物学,论文阅读,scRNA-seq]
+author: 孙睿
+mathjax: yes
+catalog: true
+---
+
+本篇博客记录自己对2023年发表在nature ecology&evolution 上的一篇论文的解读，论文题目是*Comparative single-cell transcriptomic analysis of primate brains highlights human-specific regulatory evolution*。最近自己在参考这篇论文中的分析流程去进行跨物种的单细胞比对，因此有必要将论文中的分析结果系统的整理出来，方便迁移到自己的数据集中。
+
+## 概述
+
+### 研究背景
+
+### 主要结果
+
+## 结果分析
+
+### 建立哺乳动物一致的颞中回细胞分类
+
+数据是来自人类，黑猩猩，大猩猩，猕猴，狨猴的颞中回(middle temporal gyrus)的snRNA-seq，每个物种有多个样本，且存在两种不同的测序技术(SMART-seq v4, Chromium v3)。由于细胞亚类水平的基因表达特征在物种和大脑区域之间具有高度可重复性，因此灵长类 MTG 数据集通过人类初级运动皮层分类学细胞亚类标签进行迁移学习来注释。
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="image.png" width = "35%" alt=""/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9; 
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+    图1 颞中回示意图
+  	</div>
+</center>
+
+数据概况为574156个细胞，主要细胞类型有3种，341669激活神经元(glutamatergic),158188抑制性神经元(GABAergic neuron), 74499非神经元细胞。更精1细的划分为24个细胞亚群。对每个物种，数据整合后进行聚类，按照'shatter and merge'的策略将细胞划分为cell clusters。五个物种划分出的clusters数目在103到151之间。
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="image-2.png" width = "60%" alt=""/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9; 
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+    图2 数据集概况，Ma(Million years ago)
+  	</div>
+</center>
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="image-1.png" width = "100%" alt=""/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9; 
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+  	</div>
+</center>
+
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="image-3.png" width = "80%" alt=""/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9; 
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+    图3 cell subclass 细胞类型可复制性评估
+  	</div>
+</center>
+
+应用metaneighbor方法，在不同粒度(3 cell class, 24 cell subclass, 594 cell clusters)下评估跨物种的细胞类型可复制性。cell class, cell subclass 层面的细胞注释，物种之间可以完美复制，（即不同物种相同注释的细胞的相似性大于同一物种不同注释的细胞相似性，说明在这个层面上的细胞很难看到物种差异，跨物种保守的）。
+
+图3是使用MetaNeighbor进行的细胞类型可复制性评估，热图的行列代表cell subclass，MetaNeighbor预测行列对应的cell subclass之间的一致性。只有选择4个最相似的subclass标红，4个最不相似的subclass标蓝，其他标为NA。注意到每个cell subclass中均包含5个物种，因此如果一个subclass是跨物种保守的，那么该subclass的四个最相似cell subclass应当是其余4个物种中对应的这类细胞亚群。因此heatmap中红色部分应当呈现分块对角的形式。这与图3展示的结果一致，因此说明cell subclass粒度下是跨物种保守的。
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="image-4.png" width = "40%" alt=""/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9; 
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+    图3 cell subclass 细胞类型可复制性评估 （to do）
+  	</div>
+</center>
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="image-5.png" width = "100%" alt=""/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9; 
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+    图 跨物种保守meta-cell cluster 构建
+  	</div>
+</center>
+
+文章的研究重点是评估人类和非人灵长动物之间匹配的细胞类型的基因表达的保守性，因此需要构建跨物种的保守细胞类型（即一个cluster种包含五个物种的细胞）。最终将数据中594个cluster映射到86个跨物种cluster（每个cluster中至少包含两个物种的cluster）。其中有57个cluster包含全部5个物种的cluster，这些cluster称为同源细胞类型或者跨物种保守的。
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="image-6.png" width = "100%" alt=""/>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9; 
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+    图 跨物种保守meta-cell cluster 构建
+  	</div>
+</center>
