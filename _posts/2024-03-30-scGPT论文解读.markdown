@@ -3,8 +3,8 @@ layout: post
 read_time: true
 show_date: true
 title:  scGPT论文解读
-date:   2024-03-17 13:40:20 -0600
-header-img: img/20240317/zhentian.jpg
+date:   2024-03-30 13:40:20 -0600
+header-img: img/20240330/zhentian.jpg
 tags: [计算生物学,论文阅读,scRNA-seq,LLM]
 author: 孙睿
 mathjax: yes
@@ -56,7 +56,7 @@ scGPT的结构和常见的LLM类似，包含12个transformer block, $d_{model} =
 不同于GPT的decoder only 架构，scGPT还是经典的Transformer encoder-decoder架构，更类似于masked language model，下面的源码也可以看到明显的encoder,decoder架构。
 
 <center>
-    <img src="img/20240317/image-2.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image-2.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -84,7 +84,7 @@ scGPT的结构和常见的LLM类似，包含12个transformer block, $d_{model} =
 
 其中$gene_{exp}$是作者考虑不同数据集中细胞的基因表达存在技术差异，很难通过TPM标准化或者$\log(x+1)$变换去消除这种差异，因此对每个细胞的非零基因表达进行分箱(bin)操作。分箱操作是对单个cell进行的，不同的cell的划分$[b_{k},b_{k+1}]$不同。
 <center>
-    <img src="img/20240317/image-1.png" width = "90%" alt=""/>
+    <img src="img/20240330/image-1.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -127,7 +127,7 @@ $$ h = embed_{g}(gene_{id}) + MLP(gene_{exp}) + embed_{c}(condition_{id}) $$
 具体一些,生成过程中，遮挡住的基因集合记为$G_{1}$,无遮挡的基因集合记为$G_{2}$，此时计算masked attention，attention矩阵中包含$G_{2}$中基因的两两注意力（三角矩阵）和$G_{1}$中基因自身的注意力（对角矩阵）,之后根据$G_{1}$中基因的attention score选取top K基因，根据transformer decoder部分的输出预测这Top K基因的表达量。之后将这Top K基因从$G_{1}$中移除，加入$G_{2}$，重复上述操作直到全部基因预测完。（以上是我自己推测的生成过程，总之要引入顺序关系去做掩码预测，至于是用attentiion score排序还是再加几层网络预测一个置信度去选择，应该都合理）
 
 <center>
-    <img src="img/20240317/image.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -140,7 +140,7 @@ $$ h = embed_{g}(gene_{id}) + MLP(gene_{exp}) + embed_{c}(condition_{id}) $$
 最终的目标函数如下：
 
 <center>
-    <img src="img/20240317/image-3.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image-3.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -158,7 +158,7 @@ unk 代表未知的基因集合（待预测）。
 
 和预训练目标基本一致，没啥好说的。
  <center>
-    <img src="img/20240317/image-4.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image-4.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -172,7 +172,7 @@ unk 代表未知的基因集合（待预测）。
 
 和任务1不同的是，仅有细胞的嵌入向量$h_{c}$.
     <center>
-    <img src="img/20240317/image-5.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image-5.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -186,7 +186,7 @@ unk 代表未知的基因集合（待预测）。
    
    输入是两个细胞的嵌入向量，使得相似度超过阈值$\beta$的细胞更相似
     <center>
-    <img src="img/20240317/image-6.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image-6.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -222,7 +222,7 @@ unk 代表未知的基因集合（待预测）。
 
 - 细胞类型注释
     <center>
-    <img src="img/20240317/image-7.png" width = "100%" alt=""/>
+    <img src="/img/20240330/image-7.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -236,7 +236,7 @@ unk 代表未知的基因集合（待预测）。
 
 - 扰动预测
     <center>
-    <img src="img/20240317/image-8.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image-8.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -250,7 +250,7 @@ unk 代表未知的基因集合（待预测）。
 
 - 数据整合
     <center>
-    <img src="img/20240317/image-9.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image-9.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
