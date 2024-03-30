@@ -84,7 +84,7 @@ scGPT的结构和常见的LLM类似，包含12个transformer block, $d_{model} =
 
 其中$gene_{exp}$是作者考虑不同数据集中细胞的基因表达存在技术差异，很难通过TPM标准化或者$\log(x+1)$变换去消除这种差异，因此对每个细胞的非零基因表达进行分箱(bin)操作。分箱操作是对单个cell进行的，不同的cell的划分$[b_{k},b_{k+1}]$不同。
 <center>
-    <img src="img/20240330/image-1.png" width = "90%" alt=""/>
+    <img src="/img/20240330/image-1.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
