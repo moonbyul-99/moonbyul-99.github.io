@@ -72,6 +72,7 @@ scGPT的结构和常见的LLM类似，包含12个transformer block, $d_{model} =
 
 #### Tokenization:
   使用的token为gene和condition。gene token为每个基因分配一个整数索引$id_{g}$, condition token为细胞的每个condition(例如扰动某个基因)分配一个整数索引$id_{c}$。每个细胞tokenization后会得到三组向量：
+  
   $$ 
   \begin{equation}
   \begin{aligned}
@@ -157,6 +158,7 @@ unk 代表未知的基因集合（待预测）。
 1. 基因表达预测
 
 和预训练目标基本一致，没啥好说的。
+
  <center>
     <img src="/img/20240330/image-4.png" width = "90%" alt=""/>
     <br>
@@ -171,7 +173,8 @@ unk 代表未知的基因集合（待预测）。
 2. 基于细胞嵌入的基因表达预测
 
 和任务1不同的是，仅有细胞的嵌入向量$h_{c}$.
-    <center>
+
+<center>
     <img src="/img/20240330/image-5.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
@@ -185,7 +188,8 @@ unk 代表未知的基因集合（待预测）。
 3. Elastic cell similarity 
    
    输入是两个细胞的嵌入向量，使得相似度超过阈值$\beta$的细胞更相似
-    <center>
+
+<center>
     <img src="/img/20240330/image-6.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
@@ -221,7 +225,8 @@ unk 代表未知的基因集合（待预测）。
 感觉没有特别多要说的，数据集都是公开数据集的原因，没有特别多新的生物上的结果。方法上的话就是和其他方法的对比，简单放点图和表格。
 
 - 细胞类型注释
-    <center>
+  
+<center>
     <img src="/img/20240330/image-7.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
@@ -235,7 +240,8 @@ unk 代表未知的基因集合（待预测）。
 看图j,效果较其他方法好些
 
 - 扰动预测
-    <center>
+  
+<center>
     <img src="/img/20240330/image-8.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
@@ -249,7 +255,8 @@ unk 代表未知的基因集合（待预测）。
 结果上优于GEARS
 
 - 数据整合
-    <center>
+  
+<center>
     <img src="/img/20240330/image-9.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
