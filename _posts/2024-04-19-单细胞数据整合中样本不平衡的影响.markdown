@@ -256,9 +256,24 @@ d中展示了，分别对不同细胞类型进行扰动，在不同的整合方�
     \# \{(s_{i},s_{j}) \vert s_{i},s_{j} \in X_{k}, Y_{l}, \; \forall k,l\}
     \end{equation}
     $$
-- b: $\# \{(s_{i},s_{j})  \vert  s_{i}\in X_{k^{'}},Y_{l^{'}},s_{j} \in X_{k}, Y_{l}, \; \forall k,l,k^{'},l^{'}\}$
-- c: $\# \{(s_{i},s_{j}) \vert  s_{i}\in X_{k^{'}},Y_{l},s_{j} \in X_{k}, Y_{l}, \;\forall k,k^{'},l\}$
-- d: $\# \{(s_{i},s_{j}) \vert  s_{i}\in X_{k},Y_{l^{'}},s_{j} \in X_{k}, Y_{l}, \;\forall k,l,l^{'}\}$
+- 
+  $$
+  \begin{equation}
+  b: \# \{(s_{i},s_{j})  \vert  s_{i}\in X_{k^{'}},Y_{l^{'}},s_{j} \in X_{k}, Y_{l}, \; \forall k,l,k^{'},l^{'}\}
+  \end{equation}
+  $$
+- 
+$$
+\begin{equation}
+c: \# \{(s_{i},s_{j}) \vert  s_{i}\in X_{k^{'}},Y_{l},s_{j} \in X_{k}, Y_{l}, \;\forall k,k^{'},l\}
+\end{equation}
+$$
+- 
+$$
+\begin{equation}
+d: \# \{(s_{i},s_{j}) \vert  s_{i}\in X_{k},Y_{l^{'}},s_{j} \in X_{k}, Y_{l}, \;\forall k,l,l^{'}\}
+\end{equation}
+$$
 - a 表示两个样本在划分X,Y中都分别属于同一个cluster的样本pair数目， b 表示两个样本在划分X,Y中都分别属于不同的两个cluster的样本pair数目，c 表示两个样本在划分Y中属于相同的cluster，在划分X中属于两个不同的cluster的样本pair数目, d 表示两个样本在划分X中属于相同的cluster，在划分Y中属于两个不同的cluster的样本pair数目。
 - a,b 表示两个划分中一致的样本pair, c,d 表示两个划分中不一致的样本pair
 
@@ -286,19 +301,23 @@ $$
 
 显然，$RI\in[0,1]$，$RI$度量了两个划分的一致性。$RI$存在的一个问题是对于完全随机的两个划分，RI的结果不一定为0，可以证明，在完全随机划分(permutation model)的情形下，有
 $$
+\begin{equation}
 \begin{aligned}
 \mathbb{E}_{\text{perm}}[\text{RI}(\mathcal{X}, \mathcal{Y})] &= 
 \frac{2Q^X_1 Q^Y_1 - {N \choose 2}(Q^X_1 + Q^Y_1) + {N \choose 2}^2}{{N\choose 2}} \\
 Q^X_1 &= \sum_{k} {a_{k} \choose 2}
 \end{aligned}
+\end{equation}
 $$
 
 对RI进行均值修正后得到ARI[<sup>2</sup>](#refer-anchor-2) [<sup>3</sup>](#refer-anchor-3)：
 
 $$
+\begin{equation}
 \begin{aligned}
 ARI &= \frac{RI - \mathbb{E}_{\text{perm}}[\text{RI}]}{\max{RI} - \mathbb{E}_{\text{perm}}[\text{RI}] }
 \end{aligned}
+\end{equation}
 $$
 
 在上述校正后，ARI为两定义的度量， 并且在随机情形下度量为0。
