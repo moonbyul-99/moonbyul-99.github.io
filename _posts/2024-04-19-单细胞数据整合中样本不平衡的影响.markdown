@@ -287,10 +287,10 @@ Q^X_1 &= \sum_{k} {a_{k} \choose 2}
 $$
 
 对RI进行均值修正后得到ARI[<sup>2</sup>](#refer-anchor-2) [<sup>3</sup>](#refer-anchor-3)：
+
 $$
 \begin{aligned}
-ARI &= \frac{RI - \mathbb{E}_{\text{perm}}[\text{RI}]}{\max{RI} - \mathbb{E}_{\text{perm}}[\text{RI}] } \\
-&= \frac{{N \choose 2}\sum_{k,m}\binom{n_{km}}{2}-\sum_{k}\binom{a_k}{2}\sum_{m}\binom{b_m}{2}}{\frac{1}{2}{{N \choose 2}}\left[\sum_{k}\binom{a_k}{2}+\sum_{m}\binom{b_m}{2}\right]-\sum_{k}\binom{a_k}{2}\sum_{m}\binom{b_m}{2}}.
+ARI &= \frac{RI - \mathbb{E}_{\text{perm}}[\text{RI}]}{\max{RI} - \mathbb{E}_{\text{perm}}[\text{RI}] }
 \end{aligned}
 $$
 
