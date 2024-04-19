@@ -250,7 +250,12 @@ d中展示了，分别对不同细胞类型进行扰动，在不同的整合方�
 
 
 其中$n_{ij}$为划分$X_{i}$与$Y_{j}$的交集数目。定义
-- a: $\{(s_{i},s_{j}) \vert s_{i},s_{j} \in X_{k}, Y_{l}, \; \forall k,l\}$
+-  $$
+    \begin{equation}
+    a: 
+    \# \{(s_{i},s_{j}) \vert s_{i},s_{j} \in X_{k}, Y_{l}, \; \forall k,l\}
+    \end{equation}
+    $$
 - b: $\# \{(s_{i},s_{j})  \vert  s_{i}\in X_{k^{'}},Y_{l^{'}},s_{j} \in X_{k}, Y_{l}, \; \forall k,l,k^{'},l^{'}\}$
 - c: $\# \{(s_{i},s_{j}) \vert  s_{i}\in X_{k^{'}},Y_{l},s_{j} \in X_{k}, Y_{l}, \;\forall k,k^{'},l\}$
 - d: $\# \{(s_{i},s_{j}) \vert  s_{i}\in X_{k},Y_{l^{'}},s_{j} \in X_{k}, Y_{l}, \;\forall k,l,l^{'}\}$
