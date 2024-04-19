@@ -304,7 +304,7 @@ $$
 \begin{equation}
 \begin{aligned}
 \mathbb{E}_{\text{perm}}[\text{RI}(\mathcal{X}, \mathcal{Y})] &= 
-\frac{2Q^X_1 Q^Y_1 - {N \choose 2}(Q^X_1 + Q^Y_1) + {N \choose 2}^2}{{N\choose 2}} \\
+\frac{2Q^X_1 Q^Y_1 - {N \choose 2}(Q^X_1 + Q^Y_1) + {N \choose 2}^2}{\tbinom{N}{2}} \\
 Q^X_1 &= \sum_{k} {a_{k} \choose 2}
 \end{aligned}
 \end{equation}
