@@ -315,7 +315,8 @@ $$
 $$
 \begin{equation}
 \begin{aligned}
-ARI &= \frac{RI - \mathbb{E}_{\text{perm}}[\text{RI}]}{\max{RI} - \mathbb{E}_{\text{perm}}[\text{RI}] }
+ARI &= \frac{RI - \mathbb{E}_{\text{perm}}[\text{RI}]}{\max{RI} - \mathbb{E}_{\text{perm}}[\text{RI}] }\\
+&= \frac{{N \choose 2}\sum_{k,m}\binom{n_{km}}{2}-\sum_{k}\binom{a_k}{2}\sum_{m}\binom{b_m}{2}}{\frac{1}{2}{{N \choose 2}}\left[\sum_{k}\binom{a_k}{2}+\sum_{m}\binom{b_m}{2}\right]-\sum_{k}\binom{a_k}{2}\sum_{m}\binom{b_m}{2}}
 \end{aligned}
 \end{equation}
 $$
