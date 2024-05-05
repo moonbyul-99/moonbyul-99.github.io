@@ -5,7 +5,7 @@ show_date: true
 title:  360大模型算法实习经历
 date:   2024-05-05 13:40:20 -0600
 header-img: img/20240219/刚铎.webp
-tags: [实习]
+tags: [实习,碎碎念]
 author: 孙睿
 mathjax: yes
 catalog: true
