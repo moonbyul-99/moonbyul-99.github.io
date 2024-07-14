@@ -160,7 +160,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/Picture1.png" width = "100%" alt=""/>
+    src="/img/20240714/Picture1.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -190,7 +190,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-1.png" width = "100%" alt=""/>
+    src="/img/20240714/image-1.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -204,7 +204,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/Picture2.png" width = "100%" alt=""/>
+    src="/img/20240714/Picture2.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -218,22 +218,22 @@ catalog: true
 
 物种对齐效果：
 
-<img src="../img/20240714/CY_anno.png" alt="描述1" style="width:30%; display:inline-block;">
-<img src="../img/20240714/JT_anno.png" alt="描述2" style="width:30%; display:inline-block;">
-<img src="../img/20240714/M_anno.png" alt="描述3" style="width:30%; display:inline-block;">
-<img src="../img/20240714/QF_anno.png" alt="描述4" style="width:30%; display:inline-block;">
-<img src="../img/20240714/T_anno.png" alt="描述5" style="width:30%; display:inline-block;"> 
+<img src="/img/20240714/CY_anno.png" alt="描述1" style="width:30%; display:inline-block;">
+<img src="/img/20240714/JT_anno.png" alt="描述2" style="width:30%; display:inline-block;">
+<img src="/img/20240714/M_anno.png" alt="描述3" style="width:30%; display:inline-block;">
+<img src="/img/20240714/QF_anno.png" alt="描述4" style="width:30%; display:inline-block;">
+<img src="/img/20240714/T_anno.png" alt="描述5" style="width:30%; display:inline-block;"> 
 
 脑区对齐效果：
 
-<img src="../img/20240714/BQ_anno.png" alt="描述1" style="width:30%; display:inline-block;">
-<img src="../img/20240714/CT_anno.png" alt="描述2" style="width:30%; display:inline-block;">
-<img src="../img/20240714/HM_anno.png" alt="描述3" style="width:30%; display:inline-block;">
-<img src="../img/20240714/NG_anno.png" alt="描述4" style="width:30%; display:inline-block;">
-<img src="../img/20240714/PC_anno.png" alt="描述5" style="width:30%; display:inline-block;">
-<img src="../img/20240714/QN_anno.png" alt="描述3" style="width:30%; display:inline-block;">
-<img src="../img/20240714/XQ_anno.png" alt="描述4" style="width:30%; display:inline-block;">
-<img src="../img/20240714/YB_anno.png" alt="描述5" style="width:30%; display:inline-block;">  
+<img src="/img/20240714/BQ_anno.png" alt="描述1" style="width:30%; display:inline-block;">
+<img src="/img/20240714/CT_anno.png" alt="描述2" style="width:30%; display:inline-block;">
+<img src="/img/20240714/HM_anno.png" alt="描述3" style="width:30%; display:inline-block;">
+<img src="/img/20240714/NG_anno.png" alt="描述4" style="width:30%; display:inline-block;">
+<img src="/img/20240714/PC_anno.png" alt="描述5" style="width:30%; display:inline-block;">
+<img src="/img/20240714/QN_anno.png" alt="描述3" style="width:30%; display:inline-block;">
+<img src="/img/20240714/XQ_anno.png" alt="描述4" style="width:30%; display:inline-block;">
+<img src="/img/20240714/YB_anno.png" alt="描述5" style="width:30%; display:inline-block;">  
 
 以上是关于单细胞数据整合的说明。
 
@@ -252,7 +252,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-2.png" width = "60%" alt=""/>
+    src="/img/20240714/image-2.png" width = "60%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -267,7 +267,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-3.png" width = "90%" alt=""/>
+    src="/img/20240714/image-3.png" width = "90%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -282,7 +282,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/celltype_anno.png" width = "100%" alt=""/>
+    src="/img/20240714/celltype_anno.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -297,7 +297,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/Picture3.png" width = "100%" alt=""/>
+    src="/img/20240714/Picture3.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -307,8 +307,8 @@ catalog: true
   	</div>
 </center>
 
-<img src="../img/20240714/Picture4.png" alt="描述4" style="width:40%; display:inline-block;">
-<img src="../img/20240714/Picture5.png" alt="描述5" style="width:50%; display:inline-block;">  
+<img src="/img/20240714/Picture4.png" alt="描述4" style="width:40%; display:inline-block;">
+<img src="/img/20240714/Picture5.png" alt="描述5" style="width:50%; display:inline-block;">  
 
 对于UMAP中一些细胞类型混杂的部分，我认为这是合理的现象，是忠于数据本身的分析的体现，可以参考[<sup>1</sup>](#refer-anchor-1) [<sup>3</sup>](#refer-anchor-3) 中的UMAP结果，都是存在一定程度的混杂的。
 
@@ -324,7 +324,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/Untitled_1.png" width = "100%" alt=""/>
+    src="/img/20240714/Untitled_1.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -359,7 +359,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/Picture6.png" width = "80%" alt=""/>
+    src="/img/20240714/Picture6.png" width = "80%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -372,7 +372,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-6.png" width = "100%" alt=""/>
+    src="/img/20240714/image-6.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -393,7 +393,7 @@ catalog: true
     <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-7.png" width = "100%" alt=""/>
+    src="/img/20240714/image-7.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -412,7 +412,7 @@ catalog: true
     <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-8.png" width = "100%" alt=""/>
+    src="/img/20240714/image-8.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -431,7 +431,7 @@ catalog: true
     <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-9.png" width = "100%" alt=""/>
+    src="/img/20240714/image-9.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -446,7 +446,7 @@ catalog: true
     <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-10.png" width = "100%" alt=""/>
+    src="/img/20240714/image-10.png" width = "100%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
@@ -470,7 +470,7 @@ catalog: true
 
 一个示意图如下：
 
-![alt text](../img/20240714/image-4.png)
+![alt text](/img/20240714/image-4.png)
 
 其中彩色的线代表每个细胞的atac信息，可以看到这些细胞在20000,40000,60000,80000这四个位点附近由片段被切割(value=1)。但由于每个细胞切除的片段大概率不一致，所以距离atac-seq数据分析常见的cell-peak矩阵依旧存在一定的距离。这时需要一个call-peak的过程，即将这些片段富集的区域做为一个peak，图中的黑色折线是一个不严谨的示意图，我们可以根据黑色折线中高于阈值的片段确定peak，之后统计每个细胞在这个peak区间里的片段数目。
 
@@ -479,7 +479,7 @@ catalog: true
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="../img/20240714/image-5.png" width = "60%" alt=""/>
+    src="/img/20240714/image-5.png" width = "60%" alt=""/>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
