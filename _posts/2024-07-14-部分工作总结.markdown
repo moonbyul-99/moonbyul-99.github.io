@@ -498,7 +498,7 @@ catalog: true
 
 基因调控网络(GRN)通常有两种类型，根据网络中边的关系，可以分为TF-TG网络 和 TF-RE-TG网络这两类。其结构应当是一个稀疏的有向图，稀疏性是因为调控下游基因的转录因子，不太可能是全部的几万个基因。
 
-比起scRNA-seq数据，ATAC-seq数据给我们提供了peak(RE,调控元件)的信息，这会帮助我们简历RE-TG 和 TF-RE之间的关系，因此可以通过ATAC-seq数据更好的建立符合调控机制的TF-TG关系。
+比起scRNA-seq数据，ATAC-seq数据给我们提供了peak(RE,调控元件)的信息，这会帮助我们建立RE-TG 和 TF-RE之间的关系，因此可以通过ATAC-seq数据更好的建立符合调控机制的TF-TG关系。
 
 对于调控网络推断，我选择的是celloracle方法[<sup>4</sup>](#refer-anchor-4) ,主要原因是原理简单，流程容易跑通。其主要步骤概括如下：
 
