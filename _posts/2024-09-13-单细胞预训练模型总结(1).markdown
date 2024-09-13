@@ -3,8 +3,8 @@ layout: post
 read_time: true
 show_date: true
 title:  单细胞预训练模型文献总结(1)
-date:   2024-07-14 13:40:20 -0600
-header-img: img/20240219/刚铎.webp
+date:   2024-09-13 13:40:20 -0600
+header-img: img/20240913/cat.png
 tags: [计算生物学，scRNA-seq, 论文阅读]
 author: 孙睿
 mathjax: yes
@@ -13,7 +13,7 @@ catalog: true
 
 最近想借助transformer架构去解决手头数据的建模分析问题，同时，本着“击败敌人首先要了解敌人”的思想，想要证实我的一些大逆不道想法，还是要深入了解一下scRNA-seq预训练模型这一两年来的进展。这篇博客是对近期的一些论文阅读的总结。
 
-首先感谢OmicsML(https://github.com/OmicsML/awesome-foundation-model-single-cell-papers)这个开源项目，将这几年来的一些预训练模型(foundation model)做了一个详尽的收录，我也是参考里面的论文列表去阅读的。下面将尽可能按照时间顺序去总结一下这些工作。
+首先感谢OmicsML ( https://github.com/OmicsML/awesome-foundation-model-single-cell-papers )这个开源项目，将这几年来的一些预训练模型(foundation model)做了一个详尽的收录，我也是参考里面的论文列表去阅读的。下面将尽可能按照时间顺序去总结一下这些工作。
 
 ### 预训练模型
 
@@ -31,11 +31,11 @@ catalog: true
 
 #### scGPT(2024.02.26 nature methods)
 
-参见(https://moonbyul-99.github.io/2024/03/30/scGPT%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/)
+参见 https://moonbyul-99.github.io/2024/03/30/scGPT%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/
 
 #### SATURN(2024。02.16 nature methods) 
 
-参见(https://moonbyul-99.github.io/2024/02/19/SATURN%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/)
+参见 https://moonbyul-99.github.io/2024/02/19/SATURN%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/
 
 #### scHyena(2024 biorxiv) 
 
