@@ -1,0 +1,208 @@
+---
+layout: post
+read_time: true
+show_date: true
+title:  Probability problems(1)
+date:   2024-10-05 13:40:20 -0600
+header-img: img/20240219/刚铎.webp
+tags: [Mathematics]
+author: 孙睿
+mathjax: yes
+catalog: true
+---
+
+Record a few probability problems that were done recently.
+
+### EX 1 
+
+Question source: Optiver prove it 1 [Youtube](https://www.youtube.com/watch?v=fmtscKsfMTg) 
+
+#### Question 
+
+Prove that 
+
+$$ \lim_{n\rightarrow\infty} P_n = \frac{1}{2^{2n}} \sum_{i=0}^{n} \binom{n}{i}^2 = 0 
+$$ 
+
+Proof: 
+
+Noted that $\sum_{i=0}^{n} \binom{n}{i}^2 = \binom{2n}{n}$, we have $\frac{P_{n+1}}{P_n} = \frac{2n+1}{2n+2}$. Therefore $P_n$ is a decreasing sequence with lower bound 0. So the limit holds. Claim that $P_n \leq \frac{1}{\log (2n)}$. Now prove it using induction. 
+
+Base case: $n=1$, $P_1 = \frac{1}{2}  < \frac{1}{\log 2}$. 
+
+Suppose that $P_n \leq \frac{1}{\log (2n)}$ holds. Then we need to show that 
+
+$$P_{n+1} = \frac{2n+1}{2n+2} P_n \leq \frac{2n+1}{2n+2}\frac{1}{\log (2n)} \leq \frac{1}{\log (2n+2)}$$
+
+Define $u = \frac{1}{n} \in (0,1]$, we just need to show that 
+
+$$ f(u) = 1 + \frac{u}{u+2} - \log(1+u) \geq 0 $$ 
+
+Noted that $f'(u) < 0$, so $f(u)$ is decreasing. Hence $f(u) \geq f(1) = \frac{4}{3} - \log 2$ is non-negative. Hence the claim holds. Therefore we have 
+
+$$0 \leq \lim_{n\rightarrow\infty} P_n \leq \lim_{n\rightarrow\infty}\frac{1}{\log (2n)} = 0$$
+
+#### Question 
+
+Prove that $P_n > \frac{1}{n}$.
+
+Proof：
+
+It can be proved directly using induction. Try to prove it using Cauchy inequality. 
+
+$$ n\sum_{i=0}^{n} \binom{n}{i}^2 \geq (\sum_{i=0}^{n} \binom{n}{i})^{2} = 2^{2n}$$
+
+Hence $P_n  > \frac{1}{n}$. It is easy to check that the equality does not hold. 
+
+### EX 2
+
+Question source: Optiver prove it 2 [Youtube](https://www.youtube.com/watch?v=u76c4QDHXME)
+
+#### Question 
+
+Prove that $E_{0n} = n^{2}$
+
+Proof:
+
+We have $E_{i,j} = 1 + \frac{1}{2}(E_{i-1,j} + E_{i+1,j})$. Denote $a_{i} = E_{i,n}$. Then we have that 
+
+$$
+\begin{equation}
+\begin{aligned}
+a_0 &= 1+a_1 \\
+a_1 &= 1 + \frac{1}{2}(a_2 + a_0) \\
+...& \\
+a_{n-1} &= 1 + \frac{1}{2}(a_{n-2} + a_{n}) \\
+a_n &= 0
+\end{aligned}
+\end{equation}
+$$
+
+Noted that $b_n = a_n - a_{n-1} = a_{n+1} - a_n + 2 = b_{n+1} + 2$. The sequence $b_n$
+is an arithmetic sequence with a common difference of -2. Then $b_n = 1-2n$. Then we have
+
+$$
+a_n - a_0 = -\sum_{k=1}^{n} (2k-1)
+$$ 
+
+Hence $E_{0n} = n^2$.
+
+#### Question 
+
+Calculate $E_{0,n}$ with a biased coin, whose probability of heads is $\frac{1}{3}$.
+
+In this case, we have $E_{k,n} = 1 + \frac{2}{3}E_{k-1,n} + \frac{1}{3}E_{k+1,n}$. Similarly, we have 
+
+$$ \frac{2}{3}b_k = \frac{2}{3}(a_{k} - a_{k-1}) = \frac{1}{3}(a_{k+1} - a_{k}) +1 $$
+
+Hence $b_{k+1} - 3 = 2(b_k - 3) = ... = 2^{k}(b_1 - 3) = -2^{k+2}$, Then we have 
+
+$$ a_n - a_0 = 3n - 2\sum_{i=1}^{n} 2^{i} $$ 
+
+Hence $E_{0n} = -3n + 4(2^n - 1)$ 
+
+### EX 3 
+
+Question source: Optiver prove it 3 [Youtube](https://www.youtube.com/watch?v=YKE5SRXK_nI)
+
+#### My solution
+
+**Question**:
+
+You and your friend take turns rolling a six-sided dice and you keep a joint running total. The player who first gets the sum to 6 or greater gets paid out the sum.
+
+Do you want to go first or second?
+
+**Answer**:
+
+Go second.
+
+**Proof**:
+
+Define $N = \inf \{n \geq 1, \sum_{i=1}^{n}X_{i} \geq 6\}$ is the time game stops. $N_1 = \inf \{n \geq 1, \sum_{i=1}^{n}X_{i} \geq 6, n\in 2\mathbf{N} - 1 \}$ is the time when first player wins, $N_{2} = \inf \{n \geq 1, \sum_{i=1}^{n}X_{i} \geq 6, n\in 2\mathbf{N}\}$ is the time when second player wins, where $X_i$ is the result of the dice roll. We need to compare the expected value of $\sum_{i=1}^{N_1}X_i$ and $\sum_{i=1}^{N_2} X_{i}$. 
+
+It can be shown that both $N_{1}$ and $N_{2}$ are stopping times. According to Wald's equation, we have: 
+
+$$
+\begin{equation}
+\begin{aligned}
+E[\sum_{i=1}^{N_1}X_i] &= E[X]E[N_1] \\
+E[\sum_{i=1}^{N_2}X_i] &= E[X]E[N_2]
+\end{aligned}
+\end{equation}
+$$
+
+It is easily to calute $E[X] = \frac{7}{2}$. Try to calculate $E[N_i]$. 
+
+$$
+\begin{aligned}
+E[N_2] &= 2*P(N=2) + 4P(N=4) + 6P(N=6) \\
+P(N=k) &= P(N > k) - P(N >(k+1)) \\
+&= \frac{1}{6^k} \binom{5}{k}- \frac{1}{6^{k+1}}\binom{5}{k+1}
+\end{aligned}
+$$ 
+
+we have $E[N_2]$ = 72449/15552, $E[N_1]$ = 45200/15552. So the second player has more expected profit. 
+
+We could also simulate the game to find the answer. 
+
+```python
+def roll_dice():
+    
+    total_count = 0
+    for i in range(6):
+        x = np.random.randint(1,7)
+        total_count += x 
+
+        if total_count >= 6:
+            break 
+    
+    if i % 2 == 0:
+        return (0, total_count)
+    else:
+        return (1, total_count)
+
+def get_expectation(win_0,win_1): 
+
+    N = len(win_0) + len(win_1)
+    dic_0 = {}
+    for i in win_0:
+        if i not in dic_0:
+            dic_0[i] = 1 
+        else:
+            dic_0[i] += 1
+
+    dic_1 = {}
+    for i in win_1:
+        if i not in dic_1:
+            dic_1[i] = 1 
+        else:
+            dic_1[i] += 1
+    
+    expectation_0 = 0
+    for key,value in dic_0.items():
+        dic_0[key] = value/N
+        expectation_0 += dic_0[key]*key
+
+    expectation_1 = 0
+    for key,value in dic_1.items():
+        dic_1[key] = value/N
+        expectation_1 += dic_1[key]*key
+    return (expectation_0, dic_0), (expectation_1, dic_1) 
+
+from tqdm import tqdm
+win_0 = []
+win_1 = []
+N = 100000
+
+for i in tqdm(range(N)):
+    res  = roll_dice()
+    if res[0] == 0:
+        win_0.append(res[1])
+    else:
+        win_1.append(res[1])
+
+print(get_expectation(win_0,win_1))
+
+((2.9000499999999994, {6: 0.21398, 8: 0.04789, 7: 0.04709, 10: 0.03255, 9: 0.04137, 11: 0.01869}), (4.6604, {8: 0.11893, 9: 0.09054, 6: 0.14704, 7: 0.14656, 11: 0.03234, 10: 0.06302}))
+```

@@ -5,7 +5,7 @@ show_date: true
 title:  回声定位物种单细胞多组学数据分析工作总结
 date:   2024-07-14 13:40:20 -0600
 header-img: img/20240219/刚铎.webp
-tags: [计算生物学，scRNA-seq]
+tags: [计算生物学,scRNA-seq]
 author: 孙睿
 mathjax: yes
 catalog: true
