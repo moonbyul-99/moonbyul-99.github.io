@@ -2,7 +2,7 @@
 layout: post
 read_time: true
 show_date: true
-title:  单细胞预训练模型文献总结(1)
+title:  单细胞预训练模型工作总结(1)
 date:   2024-09-13 13:40:20 -0600
 header-img: img/20240913/cat.png
 tags: [计算生物学,scRNA-seq, 论文阅读]

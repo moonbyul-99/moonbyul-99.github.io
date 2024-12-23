@@ -1,0 +1,82 @@
+---
+layout: post
+read_time: true
+show_date: true
+title:  生信笔记-1
+date:   2024-11-25 13:40:20 -0600
+header-img: img/20240219/刚铎.webp
+tags: [计算生物学]
+author: 孙睿
+mathjax: yes
+catalog: true
+--- 
+
+这篇blog记录GSEA原理和scanpy内HVG筛选的策略。
+
+## GSEA(gene set enrichment analysis) 
+
+### GSEA 目标
+
+已知一个参考基因集合S，S通常与性状或者功能相关。给定一组样本的基因表达数据，这组样本具有标签数据(例如某种性状或者实验组-对照组)，希望判断，与标签相关的差异表达基因，是否在参考基因集合S中富集。如果富集，参考基因集合S相关的性状或者功能有可能解释样本的标签差异。
+
+### GSEA 原理
+
+GSEA的基本原理是Kolmogorov–Smirnov test，KS检验是用来检验某个样本是否服从某个概率分布。对于n个i.i.d样本$\{x_{i}\}_{i=1}^{n}$, 我们有empirical distribution function估计 
+
+$$F_{n}(x)=\frac{1}{n}\sum_{i=1}^{n}\mathbb{1}_{[x_{i},+\infty]}(x)$$ 
+
+对给定的累计概率密度函数$F(x)$, K-S统计量定义为 
+
+$$D_{n} = \sup_{x} |F_{n}(x)-F(x)|$$
+
+直观上看，如果$x_{i} \sim F(x)$, 那么当样本量n充分大时，$F_{n}(x)$ 与 $F(x)$的差距应该接近0。如果$D_{n}$较大，说明empirical distribution function与给定的概率分布$F(x)$的差距较大，即样本分布与给定的概率分布不一致。 
+
+现在考虑怎样将KS检验应用于基因集合的富集分析。
+
+### GSEA 步骤 
+
+首先考虑如果差异基因和参考基因集合S富集情况下，概率分布是怎样的。对于差异基因，可以根据与标签的相关性将其排序，如果参考基因集合S与标签差异有关，那么参考基因集合S应当位于排序后差异基因列表的顶部(正相关)或者底部(负相关)。
+
+1. **基因列表排序**， 计算每个基因与标签的相关性，降序排序。
+2. **富集统计量计算**， 假设差异基因有N个基因，参考基因集合S有K个基因，定义 
+   $$
+   \begin{equation}
+   \begin{aligned}
+      P_{hit}(S,i) &= \sum_{gene_j \in S, j \leq i} \frac{|cor(gene_{j})|^{p}}{N_R} \\
+      N_R &= \sum_{gene_j\in S}|cor(gene_{j})|^{p} \\
+      P_{miss}(S,i) &= \sum_{gene_j \notin S, j \leq i} \frac{1}{N-K} \\
+      KS(S) &= max_{1\leq i \leq N} |P_{miss}(S,i) - P_{hit}(S,i)|
+   \end{aligned}
+   \end{equation}
+   $$
+
+  在上述定义中，$P_{hit}(S,i)$是参考基因集合S在排序后差异基因列表中位置分布的empirical distribution function, 修正权重$\frac{1}{K}$为$\frac{|cor|^{p}}{N_R}$。$P_{miss}(S,i)$是非参考基因集合S在列表中位置分布的empirical distribution function. 可以看到，KS越大，说明参考集合S和非参考集合中的基因分布差异越大，参考基因集合S在差异基因列表中的富集程度越高。
+
+3. **显著性检验** 
+   - 随机打乱样本的标签
+   - 重新计算每个基因和伪标签的相关性并排序
+   - 计算新的KS统计量
+   - 重复上述步骤多次
+   - 比较无扰动KS值与扰动后KS值，计算p值，$p = \frac{1}{n} \sum_{i=1}^n I_{\{KS_{permutation} \geq KS_{raw}}\}$
+   - 如果p值小于设定的显著性水平，则认为该基因集合富集是显著的。 
+  
+## HVG 筛选 
+
+scanpy中提供三种筛选方式 seurat, cell_ranger, seurat_v3, 这三种方法的具体操作过程如下:
+
+- seurat
+   输入对数标准化的数据，对每个基因，计算其均值$\mu_g$ 和 分散度 $u_g = \frac{var_g}{\mu_g}$。 之后根据所有基因的均值进行分组，分为K组。对每个箱内的基因的分散度做$z$-tranform，即
+   $$\bar{u_g} = \frac{u_g - \mu_{k}}{\sigma_{k}}$$
+    这里$\mu_{k},\sigma_k$是第k组内基因的表达量的均值和标准差。之后根据转换后的分散度对基因进行排序筛选，选择top-N个或者通过阈值的基因。
+
+- cell_ranger
+  输入对数标准化的基因，同样计算均值和分散度并分组，但是组内的标准化方式不同，即
+  $$\bar{u_g} = \frac{\vert u_g - \mu_{med}\vert }{\sigma_{med}}$$ 
+
+  这里$\mu_{med},\sigma_{med}$是第k组内每个基因的平均表达量的中位数和表达量标准差的中位数
+- seurat_v3
+
+    输入为原始的计数矩阵。对每个基因计算其均值$\mu_g$和方差$var_g$，之后对均值和方差做$\log_{10}$变换。对变换后的方差和均值做二次曲线拟合，得到拟合曲线后，对数据做如下变换
+    $$z_{ij}= \frac{x_{ij} - \bar{x_i}}{\sigma_i}$$
+    这里$x_{ij}$为基因i在细胞j内的表达量，$\sigma_i$为根据基因i的均值和二次曲线预测出的方差。最后，在上述标准化的数据$Z$中，计算每个基因表达量的方差，按照方差大小筛选基因
+

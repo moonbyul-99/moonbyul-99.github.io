@@ -5,7 +5,7 @@ show_date: true
 title:  scGPT论文解读
 date:   2024-03-30 13:40:20 -0600
 header-img: img/20240330/zhentian.jpg
-tags: [计算生物学,论文阅读,scRNA-seq,LLM]
+tags: [计算生物学,论文阅读,scRNA-seq]
 author: 孙睿
 mathjax: yes
 catalog: true
