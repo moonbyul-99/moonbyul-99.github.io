@@ -4,7 +4,7 @@ read_time: true
 show_date: true
 title:  单细胞预训练模型工作总结(2)
 date:   2024-12-02 13:40:20 -0600
-header-img: img/20240913/cat.png
+header-img: img/20241202/唐多令.jpg
 tags: [计算生物学,scRNA-seq, 论文阅读,预训练]
 author: 孙睿
 mathjax: yes
@@ -69,7 +69,7 @@ cell_embed = (gene_0_embed + count_0_embed, gene_1_embed + mask_embed..., gene_n
 
 #### 模型架构
 
-类似于bert类型的encoder-only架构，训练loss有两个，一个是count预测loss，一个是对比学习loss。count预测loss这里直接用了cross entoropy loss(<font color=red ce loss不合理, 因为基因表达量是一个存在序关系的物理指，直接做成分类肯定有问题，但是后面训练一点学不到更不合理</font>)。 
+类似于bert类型的encoder-only架构，训练loss有两个，一个是count预测loss，一个是对比学习loss。count预测loss这里直接用了cross entoropy loss(<font color=red> ce loss不合理, 因为基因表达量是一个存在序关系的物理指，直接做成分类肯定有问题，但是后面训练一点学不到更不合理</font>)。 
 
 #### 训练细节  
 
@@ -116,7 +116,7 @@ ATAC-seq预训练工作较少的原因，猜测：
 1. ATAC-seq数据少，cellXgene项目收集了大量的scRNA-seq数据，但是scATAC-seq数据缺少类似项目。 
 2. ATAC-seq数据质量较RNA-seq要差一些，研究可能优先关注RNA-seq。
 3. ATAC-seq数据特征不统一，需要额外的call peak或者peak merge环节。
-4. 高维。比起scRNA-seq数据，ATAC的维度更高，通常在10万维往上，这是一个简单的MLP可能都会带来几百万的参数量。 
+4. 高维。比起scRNA-seq数据，ATAC的维度更高，通常在10万维往上，这时一个简单的MLP可能都会带来几百万的参数量。 
 
 对ATAC-seq数据的预训练，我使用的数据是23年任兵课题组发布的小鼠脑区ATAC-seq数据，总计2.3M个细胞。特征按照基因组分bin，共5.5M个特征。
 
@@ -133,7 +133,7 @@ ATAC-seq预训练工作较少的原因，猜测：
 
 多组学数据数据量较少，可能达不到通常的pretrain需要的数目。但是考虑到其提供的多模态信息，还是值得尝试。 
 
-多模态的核心是跨模态整合，目前在小数据集上去的了不错的效果，还在推进中。
+多模态的核心是跨模态整合，目前在小数据集上取得了不错的效果，还在推进中。
 
 ## 语言模型预训练demo 
 
@@ -151,7 +151,7 @@ Roberta和GPT2-base的预训练主要参考了如下资料[参考链接](https:/
 
 ### 数据集处理流程及模型训练
 
-1. tokenization。借助分词器，将文本数据分词，得到token id 序列。
+- tokenization。借助分词器，将文本数据分词，得到token id 序列。
 
 ```python
 # GPT2 分词示例
@@ -170,7 +170,7 @@ tokenized_ds = dataset.map(tokenize_function,batched=True,remove_columns='text',
 tokenized_ds.save_to_disk('../hf_data/gpt2tokenized_bert_pretrain')
 ```
 
-2. chunk。将文本数据拼接并截断成等长的序列，构成输入的batch。
+- chunk。将文本数据拼接并截断成等长的序列，构成输入的batch。
    
 ```python 
 # Make samples to a size of 1024
@@ -204,12 +204,13 @@ chunked_ds = concated_ds.map(chunk,batched=True,batch_size=2,num_proc=256)
 chunked_ds.save_to_disk('../hf_data/gpt2tokenized_bert_pretrain_chunked_ds') # will use this latter for diff experimentation
 ```
 
-3. Dataloader
+- Dataloader
+  
 ```python
 data_collator = DataCollatorForLanguageModeling(tokenizer,mlm=False)
 ```
 
-4. 加载模型并设置训练参数。需要注意的是per_device_train_batch_size 和 gradient_accumulation_steps
+- 加载模型并设置训练参数。需要注意的是per_device_train_batch_size 和 gradient_accumulation_steps
    这两个参数。为了在有限的显存下增大batch size，使用梯度累积的策略来增大batch size。实际的batch size
    是这两个参数的乘积。
 

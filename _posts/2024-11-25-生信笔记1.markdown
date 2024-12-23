@@ -4,7 +4,7 @@ read_time: true
 show_date: true
 title:  生信笔记-1
 date:   2024-11-25 13:40:20 -0600
-header-img: img/20240219/刚铎.webp
+header-img: img/20241202/布都御魂.png
 tags: [计算生物学]
 author: 孙睿
 mathjax: yes
@@ -50,7 +50,7 @@ $$D_{n} = \sup_{x} |F_{n}(x)-F(x)|$$
    \end{equation}
    $$
 
-  在上述定义中，$P_{hit}(S,i)$是参考基因集合S在排序后差异基因列表中位置分布的empirical distribution function, 修正权重$\frac{1}{K}$为$\frac{|cor|^{p}}{N_R}$。$P_{miss}(S,i)$是非参考基因集合S在列表中位置分布的empirical distribution function. 可以看到，KS越大，说明参考集合S和非参考集合中的基因分布差异越大，参考基因集合S在差异基因列表中的富集程度越高。
+  在上述定义中，$P_{hit}(S,i)$是参考基因集合S在排序后差异基因列表中位置分布的empirical distribution function, 修正权重$\frac{1}{K}$为$\frac{\lvert cor \rvert^{p}}{N_R}$。$P_{miss}(S,i)$是非参考基因集合S在列表中位置分布的empirical distribution function. 可以看到，KS越大，说明参考集合S和非参考集合中的基因分布差异越大，参考基因集合S在差异基因列表中的富集程度越高。
 
 3. **显著性检验** 
    - 随机打乱样本的标签
