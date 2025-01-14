@@ -4,7 +4,7 @@ read_time: true
 show_date: true
 title:  生信笔记-2(celloracle 推断基因调控网络)
 date:   2025-01-14 13:40:20 -0600
-header-img: img/20250115/gondolin.jpg
+header-img: img/20250114/gondolin.jpg
 tags: [计算生物学]
 author: 孙睿
 mathjax: yes
