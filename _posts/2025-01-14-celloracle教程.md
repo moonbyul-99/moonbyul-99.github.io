@@ -4,7 +4,7 @@ read_time: true
 show_date: true
 title:  生信笔记-2(celloracle 推断基因调控网络)
 date:   2025-01-14 13:40:20 -0600
-header-img: img/20241202/布都御魂.png
+header-img: img/20250115/gondolin.jpg
 tags: [计算生物学]
 author: 孙睿
 mathjax: yes
@@ -32,7 +32,7 @@ catalog: true
 
 - GRN inference:
 
-    对basic GRN中的每个TG， 其对应的n个细胞表达量为 $x_{tg} \in R^{n}$, 根据basic GRN, 确定调控它的TF集合$\{x_{tf}^{i}\}_{i=1}^{p_{tg}}$。之后使用ridge regression来预测TG $x_{tg}$。
+    对basic GRN中的每个TG， 其对应的n个细胞表达量为 $x_{tg} \in R^{n}$, 根据basic GRN, 确定调控它的TF集合$\{x_{tf}^{i}\}$。之后使用ridge regression来预测TG $x_{tg}$。
 
     $$
     \begin{equation}
