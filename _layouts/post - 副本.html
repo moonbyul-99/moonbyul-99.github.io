@@ -60,7 +60,16 @@ layout: default
 
 				{{ content }}
 
-                <hr style="visibility: hidden;">
+                <!-- 添加 Utterances 评论框 -->
+                <script src="https://utteranc.es/client.js"
+                        repo="moonbyul-99/moonbyul-99.github.io"
+                        issue-term="pathname"
+                        label="comments"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+
 
                 <ul class="pager">
                     {% if page.previous.url %}
@@ -190,11 +199,7 @@ layout: default
 {% endif %}
 
 <!-- # 数学公式 -->
-{/% if page.mathjax %}
-<span>
-  {/% include mathjax_support.html %}
-</span>
-{/% endif %}
+{/% if page.mathjax %}<span>{/% include mathjax_support.html %}</span>{/% endif %}
 
 {% if site.anchorjs %}
 <!-- async load function -->
