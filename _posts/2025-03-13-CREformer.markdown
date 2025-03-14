@@ -4,7 +4,7 @@ read_time: true
 show_date: true
 title:  CREformer 论文阅读
 date:   2025-03-13 13:40:20 -0600
-header-img: img/20250313/tonyi.webp
+header-img: img/20250313/tongyi.webp
 tags: [计算生物学,论文阅读,预训练]
 author: 孙睿
 mathjax: yes
