@@ -21,12 +21,19 @@ catalog: true
 
 ## 基本思路 
 
-在开始梳理模型架构和分析结果之前，先思考一下why we need CREformer。
+在开始梳理模型架构和分析结果之前，先思考一下 why we need CREformer？
 
 考虑一个调控关系，TF结合RE进而影响TG，在这个过程中的影响因素会有？
 
 1. 序列信息（DNA 序列，motif序列决定TF-RE的结合潜力，RE和TG之间的距离影响调控强度），显然序列信息是物种特异的，不足以解释一个生物体内组织、细胞类型之间的差异(同一个个体序列信息是固定的)
-2. 组学信息(ATAC-seq，RNA-seq)， 这些信息是组织、细胞差异的信息，借助这些信息可以分析一些组织特意或者细胞特异的调控关系。
+2. 组学信息(ATAC-seq，RNA-seq)， 这些信息是组织、细胞差异的信息，借助这些信息可以分析一些组织特异或者细胞特异的调控关系。
+
+因此结合序列信息和组学信息的调控建模，应当能抓住不同粒度的调控关系(物种特异，组织特意，细胞特异)。
+
+再考虑一个调控模型能带来什么？
+
+1. 调控关系推断
+2. 基于调控关系进行基因表达的扰动预测
 
 ## 模型细节
 
@@ -218,16 +225,16 @@ $$
 同时作者对每个gene，定义了一个新的特征attention feature
 
 $$
-\scriptstyle \text{Attention Feature}(G_iC_j) = \scriptstyle \text{Cosine Similarity}\left[\text{Attention Score}(G_iC_j), \text{Attention Score}(G_iC_{\text{max}})\right] \cdot \sum_{R_t^{ss}} \text{scATAC}_{G_iC_j}
+\scriptstyle \text{Attention Feature}(G_iC_j) = \scriptstyle \text{Cosine Similarity}\left[\text{Attention Score}(G_iC_j), \text{Attention Score}(G_iC_{\text{max}})\right] \cdot \sum_{R_{tss}} \text{scATAC}_{G_iC_j}
 $$
 
 可以理解为这是一种新的gene activity的计算策略，在下图中的c中以及后面的dotplot中可以看到，这个新的特征能够很好的区分各个细胞类型的master TF（将 peak count转成 attention feature, 之后用logistic regression删选top feature）
 
 至于GRN的构建，对每个基因和每个TF，计算该基因的TSS上下游窗口中的，高attention score的peaks中的motif富集分数，设置阈值，建立TF->TG连边。
 
-![alt text](image.png)
+![alt text](/img/20250313/image.png)
 
-![alt text](image-1.png)
+![alt text](/img/20250313/image-1.png)
 
 ### Remark 1:
 
@@ -239,4 +246,40 @@ $$
 
 看起来挺自洽的。。。做成TF-RE-TG三元组似乎也不难。但是评测未免有些草率，仅仅check了和SCENIC+ 推出的网络的一致性。总之还是缺少很好的GRN评测。但是GRN图很好看。
 
-## 结果2：
+## 结果2：zero-shot 预测表观扰动 
+
+- 使用attention score 能筛选 enhancer-gene pair. 对每个基因，通过TSS窗口定义上下游潜在enhancer。之后对每个enhancer计算attention score， attention score的rank 中，实验验证的True enhancer-pair 会在前面。
+- TF 敲除扰动预测：对每个TF，motif scan获取结合peak, 将结合peak的 atac signal信号赋0，之后CREformer-regulatory模型进行预测，获得扰动后的基因表达
+
+![alt text](/img/20250313/image-2.png)
+
+### Remark 2:
+
+对这些表观扰动的知识不是特别熟悉，结果看起来不错。但是TF扰动结果没有对比GET的结果，是GET做不了吗？看起来扰动结果只用了bulk 的ATAC-seq，而对比的两个模型是single cell的方法。
+
+## zero-shot 预测细胞状态转移
+
+图a中展示了，对于发育到P0组织后上调的DEG，敲入这些转录因子后回下调这些DEG表达，可能恢复未发育状态。对下调的DEG回看到表达上调。
+
+图b中展示了不同模型预测敲入TF后细胞状态变化，看起来CREformer预测的一致性最高。图画的有点费解，感觉没必要画这么复杂。
+
+图e中展示了CREformer预测单细胞状态变化的工作。我们需要关注如下信息，绿色的是干细胞，灰色的是分化细胞，红色的是不同模型预测的TF扰动后的分化细胞. 在geneformer 和 scfoundation中，灰色红色完全重合说明预测的扰动后细胞和分化细胞基本一致，而CREformer能够看到灰色红色的差异，并且红色有部分和绿色的干细胞重合，说明CREformer预测的扰动后的细胞是有向干细胞分化的趋势的。
+
+![alt text](/img/20250313/image-4.png)
+![alt text](/img/20250313/image-5.png)
+
+### Remark 3:
+
+细胞状态转移的实验设计的很巧妙，UMAP图做的也不错。在缺少额外证据的情况下，我愿意相信CREformer模型是有效的
+
+## zero-shot 寻找治疗靶点
+
+有湿实验验证的结果，看起来很不错。首先基于Attention feature, 筛选正常细胞和肿瘤细胞的master TF, 并找到了乳腺癌的一个全新master TF. CREformer预测敲除该TF后可以促进肿瘤细胞向正常细胞转化。湿实验中也看到了敲除TF后，癌细胞增殖放缓。
+
+![alt text](/img/20250313/image-3.png)
+
+## Remark:
+
+- 实现了组学数据+序列数据的建模
+- 几个比较有吸引力的结果，attention score和表观信号的高度相关性，这保证了可以利用模型的预测去推断一些表观的知识，例如TF结合peak。Reprogramming的结果，单细胞的UMAP展示没见过，新意上打满分。一个看起来不错的湿实验验证。
+- 给我留了单细胞组学+基因组序列的建模空间哈哈哈~~
