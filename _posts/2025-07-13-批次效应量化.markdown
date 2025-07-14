@@ -3,7 +3,7 @@ layout: post
 read_time: true
 show_date: true
 title:  批次效应的逐基因量化
-date:   2025-01-14 13:40:20 -0600
+date:   2025-07-13 13:40:20 -0600
 header-img: img/20250114/gondolin.jpg
 tags: [计算生物学,论文阅读]
 author: 孙睿
